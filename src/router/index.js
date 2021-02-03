@@ -30,7 +30,7 @@ const routes = [
     component: EditHabitScreen,
   },
   {
-    path: '/habit/:id/edit',
+    path: '/settings',
     name: 'settings-screen',
     component: SettingsScreen,
   },
