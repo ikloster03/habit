@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <v-list>
+    <slot />
+  </v-list>
 </template>
 
 <script>
