@@ -1,10 +1,10 @@
 <template>
   <v-bottom-navigation v-model="value" :background-color="color" dark shift>
-    <v-btn>
+    <v-btn :to="{ name: 'home-screen' }">
       <span>Home</span>
       <v-icon>mdi-home</v-icon>
     </v-btn>
-    <v-btn>
+    <v-btn :to="{ name: 'settings-screen' }">
       <span>Settings</span>
       <v-icon>mdi-cog</v-icon>
     </v-btn>
@@ -14,7 +14,7 @@
 <script>
 export default {
   name: 'BottomMenu',
-  data: () => ({ value: 1 }),
+  data: () => ({ value: 0 }),
 
   computed: {
     color() {
