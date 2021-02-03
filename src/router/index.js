@@ -4,6 +4,7 @@ import HomeScreen from '@/screens/HomeScreen.vue';
 import HabitScreen from '@/screens/HabitScreen.vue';
 import CreateHabitScreen from '@/screens/CreateHabitScreen.vue';
 import EditHabitScreen from '@/screens/EditHabitScreen.vue';
+import SettingsScreen from '@/screens/SettingsScreen.vue';
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/habit/:id/edit',
     name: 'edit-habit-screen',
     component: EditHabitScreen,
+  },
+  {
+    path: '/habit/:id/edit',
+    name: 'settings-screen',
+    component: SettingsScreen,
   },
 ];
 
