@@ -1,30 +1,39 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import HomeScreen from '@/screens/HomeScreen.vue';
+import HabitScreen from '@/screens/HabitScreen.vue';
+import CreateHabitScreen from '@/screens/CreateHabitScreen.vue';
+import EditHabitScreen from '@/screens/EditHabitScreen.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home
+    path: '/',
+    name: 'home-screen',
+    component: HomeScreen,
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  }
+    path: '/habit/:id',
+    name: 'habit-screen',
+    component: HabitScreen,
+  },
+  {
+    path: '/habit/create',
+    name: 'create-habit-screen',
+    component: CreateHabitScreen,
+  },
+  {
+    path: '/habit/:id/edit',
+    name: 'edit-habit-screen',
+    component: EditHabitScreen,
+  },
 ];
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 export default router;
