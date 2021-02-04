@@ -1,9 +1,23 @@
 <template>
-  <v-container>
-    <habit-list>
-      <habit-item v-for="habit in habits" :key="`habit-${habit.id}`" :habit="habit" />
-    </habit-list>
-  </v-container>
+  <div>
+    <v-container>
+      <habit-list>
+        <habit-item v-for="habit in habits" :key="`habit-${habit.id}`" :habit="habit" />
+      </habit-list>
+    </v-container>
+    <v-btn
+      color="purple"
+      fab
+      absolute
+      large
+      dark
+      bottom
+      right
+      :to="{ name: 'create-habit-screen' }"
+    >
+      <v-icon>mdi-plus</v-icon>
+    </v-btn>
+  </div>
 </template>
 
 <script>
