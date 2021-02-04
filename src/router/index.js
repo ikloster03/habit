@@ -15,14 +15,14 @@ const routes = [
     component: HomeScreen,
   },
   {
-    path: '/habit/:id',
-    name: 'habit-screen',
-    component: HabitScreen,
-  },
-  {
     path: '/habit/create',
     name: 'create-habit-screen',
     component: CreateHabitScreen,
+  },
+  {
+    path: '/habit/:id',
+    name: 'habit-screen',
+    component: HabitScreen,
   },
   {
     path: '/habit/:id/edit',
