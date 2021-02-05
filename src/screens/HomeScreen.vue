@@ -28,33 +28,18 @@ export default {
   components: { HabitItem, HabitList },
   data() {
     return {
-      habits: [
-        {
-          id: 1,
-          title: 'Workout',
-          description: 'Workout description',
-          color: '#385F73',
-          points: [],
-          percent: 3,
-        },
-        {
-          id: 2,
-          title: 'Meditation',
-          description: 'Meditation description',
-          color: '#1F7087',
-          points: [],
-          percent: 100,
-        },
-        {
-          id: 3,
-          title: 'Teeth cleaning',
-          description: 'Teeth cleaning description',
-          color: '#952175',
-          points: [],
-          percent: 78,
-        },
-      ],
+      habits: [],
     };
+  },
+  mounted() {
+    const habits = localStorage.getItem('habits');
+
+    if (habits) {
+      this.habits = JSON.parse(habits);
+    } else {
+      this.habits = [];
+      localStorage.setItem('habits', JSON.stringify([]));
+    }
   },
 };
 </script>
