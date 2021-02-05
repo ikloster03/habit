@@ -32,6 +32,16 @@
 <script>
 export default {
   name: 'HabitForm',
+  props: {
+    habit: {
+      type: Object,
+      default: () => ({
+        title: '',
+        description: '',
+        color: '',
+      }),
+    },
+  },
   data() {
     return {
       valid: true,
@@ -50,6 +60,11 @@ export default {
           'Description must be less than 120 characters',
       ],
     };
+  },
+  mounted() {
+    if (this.habit) {
+      this.form = { ...this.habit };
+    }
   },
   methods: {
     submit() {
