@@ -1,9 +1,9 @@
 <template>
   <v-form ref="form" v-model="valid" lazy-validation class="">
     <v-text-field
-      v-model="form.name"
+      v-model="form.title"
       :counter="20"
-      :rules="nameRules"
+      :rules="titleRules"
       label="Name"
       required
     ></v-text-field>
@@ -36,11 +36,11 @@ export default {
     return {
       valid: true,
       form: {
-        name: '',
+        title: '',
         description: '',
         color: '',
       },
-      nameRules: [
+      titleRules: [
         v => !!v || 'Name is required',
         v => (v && v.length <= 20) || 'Name must be less than 20 characters',
       ],
