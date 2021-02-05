@@ -19,7 +19,6 @@ export default {
   components: { HabitForm },
   methods: {
     saveHabit(habit) {
-      console.log('habit', habit);
       const stringifiedHabits = localStorage.getItem('habits');
       const habits = stringifiedHabits ? JSON.parse(stringifiedHabits) : [];
 
