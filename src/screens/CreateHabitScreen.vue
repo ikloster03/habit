@@ -25,7 +25,7 @@ export default {
       habits.push({
         ...habit,
         id: uuidv4(),
-        points: [],
+        dates: [],
         percent: 0,
       });
 
