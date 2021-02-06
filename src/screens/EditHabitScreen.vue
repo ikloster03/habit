@@ -1,10 +1,15 @@
 <template>
   <v-container v-if="habit">
     <div class="d-flex align-center pb-4">
-      <v-btn fab color="blue" dark :to="{ name: 'home-screen' }">
+      <v-btn
+        fab
+        color="blue"
+        dark
+        :to="{ name: 'habit-screen', params: { id: habit.id } }"
+      >
         <v-icon>mdi-chevron-left</v-icon>
       </v-btn>
-      <h2 class="pl-4">Updating {{ this.habit.title }}</h2>
+      <h2 class="pl-4">Updating {{ habit.title }}</h2>
     </div>
     <habit-form :habit="habit" @form-data="updateHabit" />
   </v-container>
