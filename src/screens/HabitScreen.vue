@@ -22,6 +22,7 @@
 <script>
 import { format } from 'date-fns';
 import ChartLine from '@/components/Chart/ChartLine';
+import getHabitDateScoreMap from '@/helpers/habit';
 
 export default {
   name: 'HabitScreen',
@@ -41,49 +42,78 @@ export default {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        title: {
+          display: true,
+          text: 'Chart.js Time Point Data',
+        },
+        elements: {
+          line: {
+            tension: 0.4,
+          },
+        },
+        scales: {
+          xAxes: [
+            {
+              type: 'time',
+              time: {
+                displayFormats: { day: 'MM/YY' },
+                tooltipFormat: 'DD-MM-YY',
+                unit: 'month',
+              },
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'Date',
+              },
+              ticks: {
+                major: {
+                  fontStyle: 'bold',
+                  fontColor: '#FF0000',
+                },
+              },
+            },
+          ],
+          yAxes: [
+            {
+              display: true,
+              scaleLabel: {
+                display: true,
+                labelString: 'Score',
+              },
+            },
+          ],
+        },
       },
     };
   },
   mounted() {
     this.id = this.$route.params.id;
     const stringifiedHabits = localStorage.getItem('habits');
-    console.log(this.id, stringifiedHabits);
+
     if (stringifiedHabits) {
       this.habits = JSON.parse(stringifiedHabits);
       this.habit = this.habits.find(h => h.id === this.id);
       this.dates = this.habit.dates;
+      const scores = getHabitDateScoreMap(this.habit.dates);
       this.preparedHabitData = {
-        labels: [
-          this.getRandomInt(),
-          this.getRandomInt(),
-          this.getRandomInt(),
-          this.getRandomInt(),
-          this.getRandomInt(),
-        ],
         datasets: [
           {
-            label: 'Data One',
-            data: [
-              this.getRandomInt(),
-              this.getRandomInt(),
-              this.getRandomInt(),
-              this.getRandomInt(),
-              this.getRandomInt(),
-            ],
+            label: 'Habit Score',
+            fill: false,
+            backgroundColor: this.habit.color,
+            borderColor: this.habit.color,
+            data: scores.map(s => ({
+              x: s.date,
+              y: s.score,
+            })),
           },
         ],
       };
     }
   },
-  methods: {
-    getRandomInt() {
-      return Math.floor(Math.random() * (50 - 5 + 1)) + 5;
-    },
-  },
   watch: {
     dates: {
       handler(val) {
-        console.log('habit.dates', val);
         let habitIndex = this.habits.findIndex(h => h.id === this.id);
 
         if (habitIndex !== -1) {
