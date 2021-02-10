@@ -31,7 +31,6 @@ export default {
   mounted() {
     this.id = this.$route.params.id;
     const stringifiedHabits = localStorage.getItem('habits');
-    console.log(this.id, stringifiedHabits);
     if (stringifiedHabits) {
       this.habits = JSON.parse(stringifiedHabits);
       this.habit = this.habits.find(h => h.id === this.id);
