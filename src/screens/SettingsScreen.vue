@@ -2,22 +2,41 @@
   <div>
     <v-btn color="blue" @click="exportHabits">Export habits</v-btn>
     <br />
-    <input type="file" @change="handleFiles" />
+    <!--    <input type="file" @change="handleFiles" />-->
+    <vue-dropzone
+      ref="dropzone"
+      id="drop1"
+      :options="dropOptions"
+      @vdropzone-complete="afterComplete"
+    ></vue-dropzone>
     <v-btn color="orange" @click="importHabits">Import habits</v-btn>
   </div>
 </template>
 
 <script>
+import vueDropzone from 'vue2-dropzone';
 import { downloadFile, readFile } from '@/helpers/file';
 
 export default {
   name: 'SettingsScreen',
+  components: {
+    vueDropzone,
+  },
   data() {
     return {
       file: null,
+      dropOptions: {
+        url: 'https://httpbin.org/post',
+        maxFilesize: 4, // MB
+        maxFiles: 1,
+      },
     };
   },
   methods: {
+    afterComplete(file) {
+      console.log(file);
+      this.file = file;
+    },
     exportHabits() {
       const stringifiedHabits = localStorage.getItem('habits');
       if (stringifiedHabits) {
