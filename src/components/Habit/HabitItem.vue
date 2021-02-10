@@ -84,13 +84,25 @@ export default {
     const sortedDates = parsedDates.sort(compareDesc);
     const current = parseISO(format(new Date(), 'yyyy-MM-dd'));
     this.done = isEqual(current, sortedDates[0]);
-    const scores = getHabitDateScoreMap(this.habit.dates);
-    this.scores = scores.map(s => s.score);
-    this.percent = scores[scores.length - 1].score;
+    this.updateScores();
   },
   methods: {
     toggleCurrentDay() {
       this.done = !this.done;
+      this.$emit('today-done', { id: this.habit.id, done: this.done });
+    },
+    updateScores() {
+      const scores = getHabitDateScoreMap(this.habit.dates);
+      this.scores = scores.map(s => s.score);
+      this.percent = scores[scores.length - 1].score;
+    },
+  },
+  watch: {
+    habit: {
+      handler() {
+        this.updateScores();
+      },
+      deep: true,
     },
   },
 };
