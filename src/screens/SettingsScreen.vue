@@ -10,6 +10,13 @@
       @vdropzone-complete="afterComplete"
     ></vue-dropzone>
     <v-btn color="orange" @click="importHabits">Import habits</v-btn>
+    <br />
+    <v-select
+      v-model="$i18n.locale"
+      @change="updateLocale"
+      :items="langs"
+      label="Standard"
+    ></v-select>
   </div>
 </template>
 
@@ -30,9 +37,13 @@ export default {
         maxFilesize: 4, // MB
         maxFiles: 1,
       },
+      langs: ['en', 'ru'],
     };
   },
   methods: {
+    updateLocale() {
+      localStorage.setItem('locale', this.$i18n.locale);
+    },
     afterComplete(file) {
       console.log(file);
       this.file = file;
