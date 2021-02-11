@@ -1,0 +1,16 @@
+{
+  "menu": {
+    "home": "Home",
+    "settings": "Settings"
+  },
+  "settings": {
+    "export-habits": "Export habits",
+    "import-habits": "Import habits"
+  },
+  "form": {
+    "creating-habit": "Creating habit",
+    "editing-habit": "Editing habit",
+    "ok": "Ok",
+    "cancel": "Cancel"
+  }
+}
