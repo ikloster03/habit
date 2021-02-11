@@ -23,7 +23,7 @@
     ></v-color-picker>
     <div class="d-flex justify-center pa-4">
       <v-btn color="red" dark @click="submit">
-        Create
+        {{ $t('form.ok') }}
       </v-btn>
     </div>
   </v-form>
