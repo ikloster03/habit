@@ -9,7 +9,7 @@
       >
         <v-icon>mdi-chevron-left</v-icon>
       </v-btn>
-      <h2 class="pl-4">Updating {{ habit.title }}</h2>
+      <h2 class="pl-4">{{ $t('form.editing-habit') }}: {{ habit.title }}</h2>
     </div>
     <habit-form :habit="habit" @form-data="updateHabit" />
   </v-container>
