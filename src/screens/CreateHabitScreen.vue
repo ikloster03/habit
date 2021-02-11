@@ -4,7 +4,7 @@
       <v-btn fab color="blue" dark :to="{ name: 'home-screen' }">
         <v-icon>mdi-chevron-left</v-icon>
       </v-btn>
-      <h2 class="pl-4">Creating habit</h2>
+      <h2 class="pl-4">{{ $t('form.creating-habit') }}</h2>
     </div>
     <habit-form @form-data="saveHabit" />
   </v-container>
