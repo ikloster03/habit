@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn color="blue" @click="exportHabits">Export habits</v-btn>
+    <v-btn color="blue" @click="exportHabits">{{ $t('settings.export-habits') }}</v-btn>
     <br />
     <!--    <input type="file" @change="handleFiles" />-->
     <vue-dropzone
@@ -9,7 +9,7 @@
       :options="dropOptions"
       @vdropzone-complete="afterComplete"
     ></vue-dropzone>
-    <v-btn color="orange" @click="importHabits">Import habits</v-btn>
+    <v-btn color="orange" @click="importHabits">{{ $t('settings.import-habits') }}</v-btn>
     <br />
     <v-select
       v-model="$i18n.locale"
