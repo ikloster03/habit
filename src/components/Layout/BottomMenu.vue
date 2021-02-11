@@ -1,11 +1,11 @@
 <template>
   <v-bottom-navigation v-model="value" :background-color="color" dark shift>
     <v-btn :to="{ name: 'home-screen' }">
-      <span>Home</span>
+      <span>{{ $t('menu.home') }}</span>
       <v-icon>mdi-home</v-icon>
     </v-btn>
     <v-btn :to="{ name: 'settings-screen' }">
-      <span>Settings</span>
+      <span>{{ $t('menu.settings') }}</span>
       <v-icon>mdi-cog</v-icon>
     </v-btn>
   </v-bottom-navigation>
