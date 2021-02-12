@@ -2,10 +2,9 @@
   <div>
     <v-btn color="blue" @click="exportHabits">{{ $t('settings.export-habits') }}</v-btn>
     <br />
-    <!--    <input type="file" @change="handleFiles" />-->
     <vue-dropzone
-      ref="dropzone"
       id="drop1"
+      ref="dropzone"
       :options="dropOptions"
       @vdropzone-complete="afterComplete"
     ></vue-dropzone>
@@ -13,9 +12,9 @@
     <br />
     <v-select
       v-model="$i18n.locale"
-      @change="updateLocale"
       :items="langs"
       label="Standard"
+      @change="updateLocale"
     ></v-select>
   </div>
 </template>
@@ -55,9 +54,6 @@ export default {
         const fileType = 'json';
         downloadFile({ data: stringifiedHabits, fileName, fileType });
       }
-    },
-    handleFiles(event) {
-      this.file = event.target.files[0];
     },
     async importHabits() {
       if (this.file) {
