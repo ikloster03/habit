@@ -11,6 +11,8 @@
     "creating-habit": "Creating habit",
     "editing-habit": "Editing habit",
     "ok": "Ok",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "reset": "Reset progress",
+    "delete": "Delete habit"
   }
 }
