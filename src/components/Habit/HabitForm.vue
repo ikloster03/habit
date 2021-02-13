@@ -16,10 +16,14 @@
     <v-color-picker
       v-model="form.color"
       dot-size="20"
-      hide-mode-switch
       mode="hexa"
+      hide-canvas
+      hide-mode-switch
+      hide-sliders
+      hide-inputs
       show-swatches
       swatches-max-height="250"
+      :swatches="swatches"
     ></v-color-picker>
     <div class="d-flex justify-center pa-4">
       <v-btn color="red" dark @click="submit">
@@ -45,6 +49,13 @@ export default {
   data() {
     return {
       valid: true,
+      swatches: [
+        ['#0097A7FF'],
+        ['#E91E63FF'],
+        ['#9C27B0FF'],
+        ['#673AB7FF'],
+        ['#3F51B5FF'],
+      ],
       form: {
         title: '',
         description: '',
