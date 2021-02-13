@@ -13,7 +13,7 @@
           </v-card-title>
         </v-col>
         <v-col :cols="4" align-self="center">
-          <v-card-subtitle class="text-right"> {{ percent }}% </v-card-subtitle>
+          <v-card-subtitle class="text-h5 text-right"> {{ percent }}% </v-card-subtitle>
         </v-col>
       </v-row>
       <v-row>
