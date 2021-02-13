@@ -5,7 +5,10 @@
   },
   "settings": {
     "export-habits": "Export habits",
-    "import-habits": "Import habits"
+    "import-habits": "Import habits",
+    "change-lang": "Change language",
+    "export-import-habits": "Export/Import habits",
+    "upload": "Drop file here to upload"
   },
   "form": {
     "creating-habit": "Creating habit",
