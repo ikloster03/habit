@@ -43,7 +43,7 @@
                 mdi-check-bold
               </v-icon>
               <v-icon v-else dark>
-                mdi-check-outline
+                mdi-close
               </v-icon>
             </v-btn>
           </v-card-actions>
