@@ -1,22 +1,36 @@
 <template>
-  <div>
-    <v-btn color="blue" @click="exportHabits">{{ $t('settings.export-habits') }}</v-btn>
-    <br />
-    <vue-dropzone
-      id="drop1"
-      ref="dropzone"
-      :options="dropOptions"
-      @vdropzone-complete="afterComplete"
-    ></vue-dropzone>
-    <v-btn color="orange" @click="importHabits">{{ $t('settings.import-habits') }}</v-btn>
-    <br />
-    <v-select
-      v-model="$i18n.locale"
-      :items="langs"
-      label="Standard"
-      @change="updateLocale"
-    ></v-select>
-  </div>
+  <v-container>
+    <div class="pa-4">
+      <div class="text-h5">{{ $t('settings.change-lang') }}</div>
+      <v-select
+        v-model="$i18n.locale"
+        :items="langs"
+        label=""
+        @change="updateLocale"
+      ></v-select>
+    </div>
+    <div class="pa-4">
+      <div class="text-h5">{{ $t('settings.export-import-habits') }}</div>
+      <div class="d-flex justify-center py-4">
+        <v-btn color="blue" dark @click="exportHabits">
+          {{ $t('settings.export-habits') }}
+        </v-btn>
+      </div>
+      <div class="py-4" :key="$i18n.locale">
+        <vue-dropzone
+          id="drop1"
+          ref="dropzone"
+          :options="dropOptions"
+          @vdropzone-complete="afterComplete"
+        ></vue-dropzone>
+        <div class="d-flex justify-center py-4">
+          <v-btn color="orange" @click="importHabits">
+            {{ $t('settings.import-habits') }}
+          </v-btn>
+        </div>
+      </div>
+    </div>
+  </v-container>
 </template>
 
 <script>
@@ -35,12 +49,17 @@ export default {
         url: 'https://httpbin.org/post',
         maxFilesize: 4, // MB
         maxFiles: 1,
+        dictDefaultMessage: this.$t('settings.upload'),
       },
-      langs: ['en', 'ru'],
+      langs: [
+        { text: 'English', value: 'en' },
+        { text: 'Русский', value: 'ru' },
+      ],
     };
   },
   methods: {
     updateLocale() {
+      this.$set(this.dropOptions, 'dictDefaultMessage', this.$t('settings.upload'));
       localStorage.setItem('locale', this.$i18n.locale);
     },
     afterComplete(file) {
