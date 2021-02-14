@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <div class="d-flex align-center pb-4">
-      <v-btn fab color="blue" dark :to="{ name: 'home-screen' }">
+      <v-btn fab color="#42A5F5FF" dark :to="{ name: 'home-screen' }">
         <v-icon>mdi-chevron-left</v-icon>
       </v-btn>
       <h2 class="pl-4">{{ $t('form.creating-habit') }}</h2>
