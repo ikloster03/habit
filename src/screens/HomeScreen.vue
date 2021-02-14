@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container>
+    <v-container class="mb-12">
       <habit-list>
         <habit-item
           v-for="habit in habits"
@@ -13,11 +13,12 @@
     <v-btn
       color="purple"
       fab
-      absolute
+      fixed
       large
       dark
       bottom
       right
+      style="z-index: 5;"
       :to="{ name: 'create-habit-screen' }"
     >
       <v-icon>mdi-plus</v-icon>
