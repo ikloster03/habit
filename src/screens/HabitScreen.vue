@@ -32,7 +32,15 @@
         :options="options"
       ></chart-line>
       <div>
-        <v-date-picker v-model="dates" :max="today" multiple full-width></v-date-picker>
+        <v-date-picker
+          v-model="dates"
+          :max="today"
+          :first-day-of-week="1"
+          :locale="$i18n.locale"
+          multiple
+          no-title
+          full-width
+        ></v-date-picker>
       </div>
     </div>
     <v-divider></v-divider>
