@@ -3,13 +3,16 @@
     <div class="d-flex align-center pb-4">
       <v-btn
         fab
-        color="blue"
+        color="#42A5F5FF"
         dark
         :to="{ name: 'habit-screen', params: { id: habit.id } }"
       >
         <v-icon>mdi-chevron-left</v-icon>
       </v-btn>
-      <h2 class="pl-4">{{ $t('form.editing-habit') }}: {{ habit.title }}</h2>
+      <div class="pa-4">
+        <h3>{{ $t('form.editing-habit') }}:</h3>
+        <h5 class="text-subtitle-1">{{ habit.title }}</h5>
+      </div>
     </div>
     <habit-form :habit="habit" @form-data="updateHabit" />
   </v-container>
