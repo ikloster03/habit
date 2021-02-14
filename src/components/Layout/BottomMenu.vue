@@ -27,11 +27,11 @@ export default {
     color() {
       switch (this.value) {
         case 0:
-          return 'brown';
+          return '#546E7AFF';
         case 1:
-          return 'blue-grey';
+          return '#90A4AEFF';
         default:
-          return 'blue-grey';
+          return '#90A4AEFF';
       }
     },
   },
