@@ -78,6 +78,7 @@ export default {
       if (this.file) {
         const habits = await readFile(this.file);
         localStorage.setItem('habits', String(habits));
+        await this.$router.push({ name: 'home-screen' });
       }
     },
   },
