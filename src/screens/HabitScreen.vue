@@ -1,24 +1,51 @@
 <template>
-  <v-container v-if="habit">
-    <div class="d-flex align-center pb-4">
-      <v-btn fab color="blue" dark :to="{ name: 'home-screen' }">
+  <v-container v-if="habit" class="mb-12">
+    <div class="d-flex align-center justify-space-between pb-4">
+      <v-btn fab color="#42A5F5FF" dark :to="{ name: 'home-screen' }">
         <v-icon>mdi-chevron-left</v-icon>
       </v-btn>
-      <h2 class="pl-4">{{ habit.title }}</h2>
+      <h2 class="pa-4">{{ habit.title }}</h2>
       <v-btn
         fab
-        color="yellow"
+        color="#5C6BC0FF"
         dark
         :to="{ name: 'edit-habit-screen', params: { id: habit.id } }"
       >
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
     </div>
-    <chart-line :chart-data="preparedHabitData" :options="options"></chart-line>
-    <v-date-picker v-model="dates" :max="today" multiple></v-date-picker>
-    <div>
-      <v-btn color="orange" @click="resetProgress">{{ $t('form.reset') }}</v-btn>
-      <v-btn color="red" @click="deleteHabit">{{ $t('form.delete') }}</v-btn>
+    <div class="pa-4">
+      <div>
+        <span class="text-subtitle-1"> {{ $t('habit.progress') }}: </span>
+        <span class="font-weight-bold"> {{ percent }} % </span>
+      </div>
+      <div>
+        <span class="text-subtitle-1"> {{ $t('habit.description') }}: </span>
+        <span>{{ habit.description }}</span>
+      </div>
+    </div>
+    <div class="d-flex flex-column justify-center align-center">
+      <chart-line
+        style="width: 100%"
+        :chart-data="preparedHabitData"
+        :options="options"
+      ></chart-line>
+      <div>
+        <v-date-picker v-model="dates" :max="today" multiple full-width></v-date-picker>
+      </div>
+    </div>
+    <v-divider></v-divider>
+    <div class="d-flex flex-column justify-center align-center">
+      <div>
+        <v-btn color="orange" class="ma-4" dark @click="resetProgress">
+          {{ $t('form.reset') }}
+        </v-btn>
+      </div>
+      <div>
+        <v-btn color="red" class="ma-4" dark @click="deleteHabit">
+          {{ $t('form.delete') }}
+        </v-btn>
+      </div>
     </div>
   </v-container>
 </template>
@@ -42,14 +69,11 @@ export default {
       habit: null,
       habits: [],
       dates: [],
+      percent: 0,
       preparedHabitData: {},
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        title: {
-          display: true,
-          text: 'Chart.js Time Point Data',
-        },
         elements: {
           line: {
             tension: 0.4,
@@ -150,6 +174,12 @@ export default {
     },
     updateChartData() {
       const scores = getHabitDateScoreMap(this.dates);
+
+      if (scores.length > 0) {
+        const preparedScores = scores.map(s => s.score);
+        this.percent = preparedScores[preparedScores.length - 1];
+      }
+
       this.preparedHabitData = {
         datasets: [
           {
