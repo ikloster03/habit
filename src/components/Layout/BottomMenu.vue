@@ -1,5 +1,12 @@
 <template>
-  <v-bottom-navigation v-model="value" :background-color="color" dark shift>
+  <v-bottom-navigation
+    v-model="value"
+    :background-color="color"
+    fixed
+    hide-on-scroll
+    dark
+    shift
+  >
     <v-btn :to="{ name: 'home-screen' }">
       <span>{{ $t('menu.home') }}</span>
       <v-icon>mdi-home</v-icon>
