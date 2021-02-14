@@ -11,7 +11,7 @@
       </habit-list>
     </v-container>
     <v-btn
-      color="purple"
+      color="#EC407AFF"
       fab
       fixed
       large
