@@ -27,6 +27,7 @@
     <div class="d-flex flex-column justify-center align-center">
       <chart-line
         style="width: 100%"
+        class="pb-4"
         :chart-data="preparedHabitData"
         :options="options"
       ></chart-line>
@@ -91,7 +92,7 @@ export default {
               display: true,
               scaleLabel: {
                 display: true,
-                labelString: 'Date',
+                labelString: this.$t('chart.date'),
               },
               ticks: {
                 major: {
@@ -106,7 +107,7 @@ export default {
               display: true,
               scaleLabel: {
                 display: true,
-                labelString: 'Score',
+                labelString: this.$t('chart.score'),
               },
             },
           ],
@@ -183,7 +184,7 @@ export default {
       this.preparedHabitData = {
         datasets: [
           {
-            label: 'Habit Score',
+            label: this.$t('chart.label'),
             fill: false,
             backgroundColor: this.habit.color,
             borderColor: this.habit.color,
