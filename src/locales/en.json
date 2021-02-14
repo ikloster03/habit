@@ -17,5 +17,9 @@
     "cancel": "Cancel",
     "reset": "Reset progress",
     "delete": "Delete habit"
+  },
+  "habit": {
+    "progress": "Progress",
+    "description": "Description"
   }
 }
