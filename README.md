@@ -1,5 +1,7 @@
 # habit application
 
+Test link: [habit-n92ee.ondigitalocean.app](https://habit-n92ee.ondigitalocean.app/)
+
 ## Project setup
 ```
 yarn install
