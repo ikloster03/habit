@@ -16,7 +16,7 @@
           {{ $t('settings.export-habits') }}
         </v-btn>
       </div>
-      <div class="py-4" :key="$i18n.locale">
+      <div :key="$i18n.locale" class="py-4">
         <vue-dropzone
           id="drop1"
           ref="dropzone"
