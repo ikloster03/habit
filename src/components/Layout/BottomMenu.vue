@@ -3,7 +3,6 @@
     v-model="value"
     :background-color="color"
     fixed
-    hide-on-scroll
     dark
     shift
   >
