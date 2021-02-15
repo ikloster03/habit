@@ -1,12 +1,6 @@
 <template>
-  <v-bottom-navigation
-    v-model="value"
-    :background-color="color"
-    fixed
-    dark
-    shift
-  >
-    <v-btn :to="{ name: 'home-screen' }">
+  <v-bottom-navigation v-model="value" :background-color="color" fixed dark shift>
+    <v-btn exact :to="{ name: 'home-screen' }">
       <span>{{ $t('menu.home') }}</span>
       <v-icon>mdi-home</v-icon>
     </v-btn>
@@ -30,7 +24,7 @@ export default {
         case 1:
           return '#90A4AEFF';
         default:
-          return '#90A4AEFF';
+          return '#546E7AFF';
       }
     },
   },
