@@ -36,6 +36,7 @@
 <script>
 import vueDropzone from 'vue2-dropzone';
 import { downloadFile, readFile } from '@/helpers/file';
+import HabitList from '@/modules/habit/habit-list';
 
 export default {
   name: 'SettingsScreen',
@@ -55,6 +56,7 @@ export default {
         { text: 'English', value: 'en' },
         { text: 'Русский', value: 'ru' },
       ],
+      habitList: new HabitList(),
     };
   },
   methods: {
@@ -67,17 +69,17 @@ export default {
       this.file = file;
     },
     exportHabits() {
-      const stringifiedHabits = localStorage.getItem('habits');
-      if (stringifiedHabits) {
-        const fileName = 'habits-backup';
-        const fileType = 'json';
-        downloadFile({ data: stringifiedHabits, fileName, fileType });
-      }
+      const strHabits = this.habitList.restore().string();
+      const fileName = 'habits-backup';
+      const fileType = 'json';
+
+      downloadFile({ data: strHabits, fileName, fileType });
     },
     async importHabits() {
       if (this.file) {
         const habits = await readFile(this.file);
-        localStorage.setItem('habits', String(habits));
+        this.habitList.set(JSON.parse(habits)).store();
+
         await this.$router.push({ name: 'home-screen' });
       }
     },
