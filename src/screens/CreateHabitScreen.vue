@@ -11,25 +11,24 @@
 </template>
 
 <script>
-import { v4 as uuidv4 } from 'uuid';
 import HabitForm from '@/components/Habit/HabitForm.vue';
+import HabitList from '@/modules/habit/habit-list';
+import Habit from '@/modules/habit/habit';
 
 export default {
   name: 'CreateHabitScreen',
   components: { HabitForm },
   methods: {
-    saveHabit(habit) {
-      const stringifiedHabits = localStorage.getItem('habits');
-      const habits = stringifiedHabits ? JSON.parse(stringifiedHabits) : [];
-
-      habits.push({
-        ...habit,
-        id: uuidv4(),
+    saveHabit(formData) {
+      const habitList = new HabitList();
+      const habit = new Habit({
+        ...formData,
         dates: [],
-        percent: 0,
       });
-
-      localStorage.setItem('habits', JSON.stringify(habits));
+      habitList
+        .restore()
+        .add(habit.getObject())
+        .store();
 
       this.$router.push({ name: 'home-screen' });
     },
