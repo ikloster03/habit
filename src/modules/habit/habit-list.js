@@ -22,7 +22,18 @@ class HabitList {
   getById(habitId) {
     const habitIndex = this.habits.findIndex(h => h.id === habitId);
 
+    if (habitIndex === -1) {
+      return null;
+    }
+
     return this.habits[habitIndex];
+  }
+
+  updateById(habitId, habit) {
+    const habitIndex = this.habits.findIndex(h => h.id === habitId);
+    this.habits[habitIndex] = { ...habit };
+
+    return this;
   }
 
   add(habit) {
@@ -38,7 +49,7 @@ class HabitList {
       this.habits.splice(habitIndex, 1);
     }
 
-    return habitIndex;
+    return this;
   }
 
   reset() {
@@ -55,7 +66,13 @@ class HabitList {
 
   restore() {
     const strHabits = localStorage.getItem(HABITS);
-    this.habits = strHabits ? JSON.parse(strHabits) : [];
+
+    if (strHabits) {
+      this.habits = JSON.parse(strHabits);
+    } else {
+      this.habits = [];
+      this.store();
+    }
 
     return this;
   }
