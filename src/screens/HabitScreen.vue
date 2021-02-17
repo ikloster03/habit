@@ -63,20 +63,16 @@
 import { format } from 'date-fns';
 import ChartLine from '@/components/Chart/ChartLine';
 import getHabitDateScoreMap from '@/helpers/habit';
+import HabitList from '@/modules/habit/habit-list';
 
 export default {
   name: 'HabitScreen',
   components: { ChartLine },
-  computed: {
-    today() {
-      return format(new Date(), 'yyyy-MM-dd');
-    },
-  },
   data() {
     return {
       id: null,
       habit: null,
-      habits: [],
+      habitList: new HabitList(),
       dates: [],
       percent: 0,
       preparedHabitData: {},
@@ -123,63 +119,49 @@ export default {
       },
     };
   },
-  mounted() {
-    this.habits = this.getHabits();
-    this.id = this.$route.params.id;
-    this.habit = this.getHabit(this.habits);
-    this.dates = this.habit.dates;
-    this.updateChartData();
+  computed: {
+    today() {
+      return format(new Date(), 'yyyy-MM-dd');
+    },
   },
   watch: {
     dates: {
       handler(val) {
-        let habitIndex = this.habits.findIndex(h => h.id === this.id);
+        const habit = this.habitList.restore().getById(this.id);
 
-        if (habitIndex !== -1) {
-          this.habits[habitIndex].dates = val;
-          localStorage.setItem('habits', JSON.stringify(this.habits));
+        if (habit) {
+          this.habitList.updateById(this.id, { ...habit, dates: val });
+          this.habitList.store();
           this.updateChartData();
         }
       },
       deep: true,
     },
   },
+  mounted() {
+    this.id = this.$route.params.id;
+    this.habit = this.habitList.restore().getById(this.id);
+    this.dates = this.habit.dates;
+    this.updateChartData();
+  },
   methods: {
     resetProgress() {
-      let habitIndex = this.habits.findIndex(h => h.id === this.id);
+      const habit = this.habitList.restore().getById(this.id);
 
-      if (habitIndex !== -1) {
-        this.$set(this.habits, habitIndex, { ...this.habits[habitIndex], dates: [] });
-        localStorage.setItem('habits', JSON.stringify(this.habits));
+      if (habit) {
+        this.habitList.updateById(this.id, { ...habit, dates: [] });
+        this.habitList.store();
         this.updateChartData();
         this.$router.push({ name: 'home-screen' });
       }
     },
     deleteHabit() {
-      let habitIndex = this.habits.findIndex(h => h.id === this.id);
-
-      if (habitIndex !== -1) {
-        this.habits.splice(habitIndex, 1);
-        localStorage.setItem('habits', JSON.stringify(this.habits));
-        this.updateChartData();
-        this.$router.push({ name: 'home-screen' });
-      }
-    },
-    getHabits() {
-      const stringifiedHabits = localStorage.getItem('habits');
-
-      if (stringifiedHabits) {
-        return JSON.parse(stringifiedHabits);
-      }
-
-      return [];
-    },
-    getHabit(habits) {
-      if (this.id && habits && habits.length > 0) {
-        return habits.find(h => h.id === this.id);
-      }
-
-      return null;
+      this.habitList
+        .restore()
+        .remove(this.id)
+        .store();
+      this.updateChartData();
+      this.$router.push({ name: 'home-screen' });
     },
     updateChartData() {
       const scores = getHabitDateScoreMap(this.dates);
