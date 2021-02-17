@@ -3,7 +3,7 @@
     <v-container class="mb-12">
       <habit-list>
         <habit-item
-          v-for="habit in habits"
+          v-for="habit in habitList.list"
           :key="`habit-${habit.id}`"
           :habit="habit"
           @today-done="markToday"
@@ -28,47 +28,39 @@
 
 <script>
 import { format } from 'date-fns';
-import HabitList from '@/components/Habit/HabitList';
+import Habits from '@/components/Habit/HabitList';
 import HabitItem from '@/components/Habit/HabitItem';
+import HabitList from '@/modules/habit/habit-list';
 
 export default {
   name: 'HomeScreen',
-  components: { HabitItem, HabitList },
+  components: { HabitItem, 'habit-list': Habits },
   data() {
     return {
-      habits: [],
+      habitList: new HabitList(),
     };
   },
   mounted() {
-    const habits = localStorage.getItem('habits');
-
-    if (habits) {
-      this.habits = JSON.parse(habits);
-    } else {
-      this.habits = [];
-      localStorage.setItem('habits', JSON.stringify([]));
-    }
+    this.habitList.restore();
+    this.habits = this.habitList.list;
   },
   methods: {
     markToday({ id }) {
       const currentDate = format(new Date(), 'yyyy-MM-dd');
+      const habit = this.habitList.restore().getById(id);
+      if (!habit) {
+        return;
+      }
 
-      const strHabits = localStorage.getItem('habits');
-      this.habits = JSON.parse(strHabits);
-
-      const habitIndex = this.habits.findIndex(h => h.id === id);
-      const dates = this.habits[habitIndex].dates;
+      const dates = habit.dates;
       const dateIndex = dates.indexOf(currentDate);
-
       if (dateIndex !== -1) {
         dates.splice(dateIndex, 1);
       } else {
         dates.push(currentDate);
       }
 
-      this.$set(this.habits, habitIndex, { ...this.habits[habitIndex], dates });
-
-      localStorage.setItem('habits', JSON.stringify(this.habits));
+      this.habitList.updateById(id, { ...habit, dates }).store();
     },
   },
 };
