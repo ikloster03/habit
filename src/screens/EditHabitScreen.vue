@@ -20,6 +20,7 @@
 
 <script>
 import HabitForm from '@/components/Habit/HabitForm.vue';
+import HabitList from '@/modules/habit/habit-list';
 
 export default {
   name: 'EditHabitScreen',
@@ -28,26 +29,16 @@ export default {
     return {
       id: null,
       habit: null,
-      habits: [],
+      habitList: new HabitList(),
     };
   },
   mounted() {
     this.id = this.$route.params.id;
-    const stringifiedHabits = localStorage.getItem('habits');
-    if (stringifiedHabits) {
-      this.habits = JSON.parse(stringifiedHabits);
-      this.habit = this.habits.find(h => h.id === this.id);
-    }
+    this.habit = this.habitList.restore().getById(this.id);
   },
   methods: {
     updateHabit(updatedHabit) {
-      let habitIndex = this.habits.findIndex(h => h.id === this.id);
-
-      if (habitIndex !== -1) {
-        this.habits[habitIndex] = { ...updatedHabit };
-        localStorage.setItem('habits', JSON.stringify(this.habits));
-      }
-
+      this.habitList.updateById(this.id, updatedHabit).store();
       this.$router.push({ name: 'home-screen' });
     },
   },
