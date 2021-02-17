@@ -22,34 +22,14 @@ class Habit {
     return this;
   }
 
-  get id() {
-    return this.id;
-  }
-
-  get title() {
-    return this.title;
-  }
-  get description() {
-    return this.description;
-  }
-  get dates() {
-    return this.dates;
-  }
-  get color() {
-    return this.color;
-  }
-
-  set title(title) {
-    this.title = title;
-  }
-  set description(description) {
-    this.description = description;
-  }
-  set dates(dates) {
-    this.dates = dates;
-  }
-  set color(color) {
-    this.color = color;
+  getObject() {
+    return {
+      id: this.id,
+      title: this.title,
+      description: this.description,
+      dates: this.dates,
+      color: this.color,
+    };
   }
 }
 
