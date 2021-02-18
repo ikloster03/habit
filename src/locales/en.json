@@ -8,7 +8,8 @@
     "import-habits": "Import habits",
     "change-lang": "Change language",
     "export-import-habits": "Export/Import habits",
-    "upload": "Drop file here to upload"
+    "upload": "Drop file here to upload",
+    "delete-habits": "Delete all habits"
   },
   "form": {
     "creating-habit": "Creating habit",
