@@ -29,6 +29,14 @@
           </v-btn>
         </div>
       </div>
+      <v-divider></v-divider>
+      <div class="d-flex flex-column justify-center align-center py-4">
+        <div>
+          <v-btn color="red" class="ma-4" dark @click="deleteAllHabits">
+            {{ $t('settings.delete-habits') }}
+          </v-btn>
+        </div>
+      </div>
     </div>
   </v-container>
 </template>
@@ -82,6 +90,10 @@ export default {
 
         await this.$router.push({ name: 'home-screen' });
       }
+    },
+    async deleteAllHabits() {
+      this.habitList.reset().store();
+      await this.$router.push({ name: 'home-screen' });
     },
   },
 };
