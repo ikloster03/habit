@@ -1,6 +1,6 @@
 # habit application
 
-Test link: [habit-n92ee.ondigitalocean.app](https://habit-n92ee.ondigitalocean.app/)
+Test link: [https://habitsync.app/](https://habitsync.app/)
 
 ## Project setup
 ```
