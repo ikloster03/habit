@@ -4,7 +4,12 @@ module.exports = {
       locale: 'en',
       fallbackLocale: 'en',
       localeDir: 'locales',
-      enableInSFC: true
-    }
-  }
-}
+      enableInSFC: true,
+    },
+  },
+  pwa: {
+    workboxOptions: {
+      skipWaiting: true,
+    },
+  },
+};
