@@ -79,6 +79,14 @@ export default {
       done: false,
     };
   },
+  watch: {
+    habit: {
+      handler() {
+        this.updateScores();
+      },
+      deep: true,
+    },
+  },
   mounted() {
     const parsedDates = this.habit.dates.map(date => parseISO(date));
     const sortedDates = parsedDates.sort(compareDesc);
@@ -97,14 +105,6 @@ export default {
         this.scores = scores.map(s => s.score);
         this.percent = scores[scores.length - 1].score;
       }
-    },
-  },
-  watch: {
-    habit: {
-      handler() {
-        this.updateScores();
-      },
-      deep: true,
     },
   },
 };
