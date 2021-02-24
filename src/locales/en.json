@@ -17,7 +17,9 @@
     "ok": "Ok",
     "cancel": "Cancel",
     "reset": "Reset progress",
-    "delete": "Delete habit"
+    "delete": "Delete habit",
+    "question-reset": "Do you want to reset the progress?",
+    "question-delete": "Do you want to delete the habit?"
   },
   "habit": {
     "progress": "Progress",
