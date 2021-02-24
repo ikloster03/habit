@@ -46,16 +46,23 @@
     <v-divider></v-divider>
     <div class="d-flex flex-column justify-center align-center">
       <div>
-        <v-btn color="orange" class="ma-4" dark @click="resetProgress">
+        <v-btn color="orange" class="ma-4" dark @click="openPopup('reset')">
           {{ $t('form.reset') }}
         </v-btn>
       </div>
       <div>
-        <v-btn color="red" class="ma-4" dark @click="deleteHabit">
+        <v-btn color="red" class="ma-4" dark @click="openPopup('delete')">
           {{ $t('form.delete') }}
         </v-btn>
       </div>
     </div>
+    <consent-popup
+      :dialog="dialog"
+      :type="type"
+      :title="title"
+      @cancel="popupCancel"
+      @submit="popupSubmit"
+    />
   </v-container>
 </template>
 
@@ -64,10 +71,11 @@ import { format } from 'date-fns';
 import ChartLine from '@/components/Chart/ChartLine';
 import getHabitDateScoreMap from '@/helpers/habit';
 import HabitList from '@/modules/habit/habit-list';
+import ConsentPopup from '@/components/Popup/ConsentPopup';
 
 export default {
   name: 'HabitScreen',
-  components: { ChartLine },
+  components: { ConsentPopup, ChartLine },
   data() {
     return {
       id: null,
@@ -117,6 +125,11 @@ export default {
           ],
         },
       },
+      dialog: false,
+      type: '',
+      title: '',
+      canReset: false,
+      canDelete: false,
     };
   },
   computed: {
@@ -145,6 +158,32 @@ export default {
     this.updateChartData();
   },
   methods: {
+    openPopup(type) {
+      if (type === 'reset') {
+        this.title = this.$t('form.question-reset');
+      } else if (type === 'delete') {
+        this.title = this.$t('form.question-delete');
+      }
+
+      this.type = type;
+      this.dialog = true;
+    },
+    closePopup() {
+      this.type = '';
+      this.dialog = false;
+    },
+    popupCancel() {
+      this.closePopup();
+    },
+    popupSubmit(type) {
+      if (type === 'reset') {
+        this.resetProgress();
+      } else if (type === 'delete') {
+        this.deleteHabit();
+      }
+
+      this.closePopup();
+    },
     resetProgress() {
       const habit = this.habitList.restore().getById(this.id);
 
@@ -189,5 +228,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped></style>
