@@ -21,7 +21,7 @@
       </div>
       <div>
         <span class="text-subtitle-1"> {{ $t('habit.description') }}: </span>
-        <span>{{ habit.description }}</span>
+        <span style="overflow-wrap: break-word;">{{ habit.description }}</span>
       </div>
     </div>
     <div class="d-flex flex-column justify-center align-center">
