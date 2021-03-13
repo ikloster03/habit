@@ -104,6 +104,8 @@ export default {
       if (scores.length > 0) {
         this.scores = scores.map(s => s.score);
         this.percent = scores[scores.length - 1].score;
+      } else {
+        this.percent = 0;
       }
     },
   },

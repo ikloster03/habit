@@ -19,7 +19,7 @@ const getHabitDateScoreMap = dates => {
   return sortedDates.map((date, index) => ({
     // date: format(date, 'MM dd'),
     date: date,
-    score: calculateScore(index),
+    score: calculateScore(index + 1),
   }));
 };
 
