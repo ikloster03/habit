@@ -20,7 +20,6 @@ module.exports = {
       maskIcon: null,
       msTileImage: null,
     },
-    workboxPluginMode: 'InjectManifest',
     workboxOptions: {
       skipWaiting: true,
     },
